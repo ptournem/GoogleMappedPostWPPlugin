@@ -18,10 +18,17 @@ if (!defined('ABSPATH')) {
 class googleMappedPostWPPlugin {
 
     public function __construct() {
-	include_once plugin_dir_path(__FILE__) . '/class/googleMappedPostMetaBoxes.class.php';
-	new googleMappedPostMetaBoxes();
-	include_once plugin_dir_path(__FILE__) . '/class/googleMappedPostSettings.class.php';
-	new googleMappedPostSettings();
+        // add settings
+        include_once plugin_dir_path(__FILE__) . '/class/googleMappedPostSettings.class.php';
+        new googleMappedPostSettings();
+
+        // add metaboxes
+        include_once plugin_dir_path(__FILE__) . '/class/googleMappedPostMetaBoxes.class.php';
+        new googleMappedPostMetaBoxes();
+
+        // add Shortcode
+        include_once plugin_dir_path(__FILE__) . '/class/googleMappedPostShortCode.class.php';
+        new googleMappedPostShortCode();
     }
 
 }

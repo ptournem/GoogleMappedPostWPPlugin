@@ -8,6 +8,8 @@ class googleMappedPostMetaBoxes {
 
     private $api_key = null;
 
+    const META_LOCATION_KEY = 'google-mapped-post-coord';
+
     public function __construct() {
         // Post Meta Box
         add_action('load-post.php', array($this, 'post_meta_boxes_setup'));
@@ -34,7 +36,7 @@ class googleMappedPostMetaBoxes {
         }
         //wp_enqueue_style('wp-color-picker');
         wp_enqueue_script('meta-box-google-mapped-post', plugin_dir_url(__DIR__) . 'js/meta-boxes.js', array('jquery'));
-        wp_enqueue_script('google_map', "https://maps.googleapis.com/maps/api/js?key=$api_key&signed_in=true&callback=initMap", array('meta-box-google-mapped-post'), false, true);
+        wp_enqueue_script('google_map', "https://maps.googleapis.com/maps/api/js?key=" . $this->api_key . "&signed_in=true&callback=initMap", array('meta-box-google-mapped-post'), false, true);
     }
 
     /**
@@ -70,23 +72,20 @@ class googleMappedPostMetaBoxes {
         /* Get the posted data and sanitize it for use as an HTML class. */
         $new_meta_value = ( isset($_POST['google-mapped-post-coord']) ? $_POST['google-mapped-post-coord'] : '' );
 
-        /* Get the meta key. */
-        $meta_key = 'google-mapped-post-coord';
-
         /* Get the meta value of the custom field key. */
-        $meta_value = get_post_meta($post_id, $meta_key, true);
+        $meta_value = get_post_meta($post_id, self::META_LOCATION_KEY, true);
 
         /* If a new meta value was added and there was no previous value, add it. */
         if ($new_meta_value && '' == $meta_value) {
-            add_post_meta($post_id, $meta_key, $new_meta_value, true);
+            add_post_meta($post_id, self::META_LOCATION_KEY, $new_meta_value, true);
         }
 
         /* If the new meta value does not match the old value, update it. */ elseif ($new_meta_value && $new_meta_value != $meta_value) {
-            update_post_meta($post_id, $meta_key, $new_meta_value);
+            update_post_meta($post_id, self::META_LOCATION_KEY, $new_meta_value);
         }
 
         /* If there is no new meta value but an old value exists, delete it. */ elseif ('' == $new_meta_value && $meta_value) {
-            delete_post_meta($post_id, $meta_key, $meta_value);
+            delete_post_meta($post_id, self::META_LOCATION_KEY, $meta_value);
         }
     }
 
@@ -116,7 +115,7 @@ class googleMappedPostMetaBoxes {
         <p>
             <label for="google-mapped-post-coord">Select the post location on the Google Map.</label>
             <br />
-            <input class="widefat" type="hidden" name="google-mapped-post-coord" id="google-mapped-post-coord" value="<?php echo esc_attr(get_post_meta($object->ID, 'google-mapped-post-coord', true)); ?>" size="30" />
+            <input class="widefat" type="hidden" name="google-mapped-post-coord" id="google-mapped-post-coord" value="<?php echo esc_attr(get_post_meta($object->ID, self::META_LOCATION_KEY, true)); ?>" size="30" />
         <div id="map" style="<?php if ($this->isApiKeyOK()) { ?>height: 400px;<?php } ?>">
             <p><strong>Bad Google Map Api Key provided, see GoogleMappedPosts settings !</strong></p>
         </div>
