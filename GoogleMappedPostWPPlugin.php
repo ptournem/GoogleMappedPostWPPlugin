@@ -125,7 +125,7 @@ class googleMappedPostWPPlugin {
 	<p>
 	    <label for="google-mapped-post-coord">Select the post location on the Google Map.</label>
 	    <br />
-	    <input class="widefat" type="text" name="google-mapped-post-coord" id="google-mapped-post-coord" value="<?php echo esc_attr(get_post_meta($object->ID, 'google-mapped-post-coord', true)); ?>" size="30" />
+	    <input class="widefat" type="hidden" name="google-mapped-post-coord" id="google-mapped-post-coord" value="<?php echo esc_attr(get_post_meta($object->ID, 'google-mapped-post-coord', true)); ?>" size="30" />
 	<div id="map" style="height: 400px;"></div>
 	</p>
 	<?php
