@@ -7,8 +7,7 @@ function initMap() {
     // create map
     var map = new google.maps.Map(document.getElementById('google-mapped-shortcode'), {
 	center: center,
-	zoom: 10,
-	draggableCursor: 'pointer'
+	zoom: 10
     });
 
     // add markers and paths
@@ -86,12 +85,54 @@ function initMap() {
      * @returns {undefined}
      */
     function selectPost(id) {
-	// todo : verify if the id exists
+	// verify if the id exists
+	if (id < 0 || id >= GoogleMappedPosts.length) {
+	    return;
+	}
+
+	// save the selected post
 	currentSelected = id;
+	// move to the selected post
 	map.panTo(unformatLatLng(GoogleMappedPosts[id].location));
 
-	// todo block previous , next when not possible;
 
+
+	// ensure , the user is shown that he can click anymore on some control
+	switch (currentSelected) {
+	    case 0:
+		enableControl(oldestControl, false);
+		enableControl(nextControl, false);
+		enableControl(newestControl, true);
+		enableControl(previousControl, true);
+		break;
+	    case (GoogleMappedPosts.length - 1):
+		enableControl(oldestControl, true);
+		enableControl(nextControl, true);
+		enableControl(newestControl, false);
+		enableControl(previousControl, false);
+		break;
+	    default:
+		enableControl(newestControl, true);
+		enableControl(previousControl, true);
+		enableControl(oldestControl, true);
+		enableControl(nextControl, true);
+		break
+	}
+
+    }
+
+    function enableControl(control, enabled) {
+	if (enabled) {
+	    control.style.backgroundColor = '#fff';
+	    control.style.border = '2px solid #fff';
+	    control.style.cursor = 'pointer';
+	    control.style.color = 'rgb(25,25,25)';
+	} else {
+	    control.style.backgroundColor = 'lightgrey';
+	    control.style.border = '2px solid lightgrey';
+	    control.style.cursor = 'not-allowed';
+	    control.style.color = 'grey';
+	}
     }
 
     /**
@@ -134,6 +175,7 @@ function initMap() {
 	controlUI.style.borderRadius = '3px';
 	controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
 	controlUI.style.cursor = 'pointer';
+	controlUI.style.color = 'rgb(25,25,25)';
 	controlUI.style.marginBottom = '22px';
 	controlUI.style.marginLeft = "5px";
 	controlUI.style.minWidth = "40px";
@@ -144,7 +186,7 @@ function initMap() {
 
 	// Set CSS for the control interior.
 	var controlText = document.createElement('div');
-	controlText.style.color = 'rgb(25,25,25)';
+
 	controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
 	controlText.style.fontSize = '16px';
 	controlText.style.lineHeight = '38px';
