@@ -6,8 +6,14 @@ function initMap() {
 
     // create map
     var map = new google.maps.Map(document.getElementById('google-mapped-shortcode'), {
-	center: center,
-	zoom: 10
+        center: center,
+        zoom: 10
+    });
+
+    var infoWindowContent = document.createElement('div');
+
+    var infowindow = new google.maps.InfoWindow({
+        content: infoWindowContent
     });
 
     // add markers and paths
@@ -93,7 +99,15 @@ function initMap() {
 	// save the selected post
 	currentSelected = id;
 	// move to the selected post
-	map.panTo(unformatLatLng(GoogleMappedPosts[id].location));
+	infowindow.close();
+	setInfoWindowsContent(GoogleMappedPosts[id]);
+	window.setTimeout(function () {
+	    map.panTo(unformatLatLng(GoogleMappedPosts[id].location));
+	    window.setTimeout(function () {
+            infowindow.open(map, markers[id]);
+	    }, 100);
+	}, 500);
+
 
 
 
@@ -119,6 +133,13 @@ function initMap() {
 		break
 	}
 
+    }
+
+    function setInfoWindowsContent(el) {
+        infoWindowContent.innerHTML = '<h3>' + el.title + "</h3>";
+        if(el.thumbnail != false){
+
+        }
     }
 
     function enableControl(control, enabled) {

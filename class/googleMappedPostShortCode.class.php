@@ -64,6 +64,8 @@ class googleMappedPostShortCode {
         foreach ($post_list as $post) {
             $p = array();
             $p['title'] = $post->post_title;
+            $p['date'] = $post->post_date;
+            $p['content'] = $post->post_content;
             $p['link'] = get_post_permalink($post->ID);
             $p['thumbnail'] = wp_get_attachment_url(get_post_thumbnail_id($post->ID));
             $p['location'] = esc_attr(get_post_meta($post->ID, googleMappedPostMetaBoxes::META_LOCATION_KEY, true));
