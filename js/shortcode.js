@@ -1,19 +1,20 @@
 function initMap() {
     var newestControl, previousControl, nextControl, oldestControl;
     var currentSelected = null;
+    var firstLoad = true;
     // default center value
     var center = {lat: -34.397, lng: 150.644};
 
     // create map
     var map = new google.maps.Map(document.getElementById('google-mapped-shortcode'), {
-        center: center,
-        zoom: 10
+	center: center,
+	zoom: 10
     });
 
     var infoWindowContent = document.createElement('div');
 
     var infowindow = new google.maps.InfoWindow({
-        content: infoWindowContent
+	content: infoWindowContent
     });
 
     // add markers and paths
@@ -26,12 +27,20 @@ function initMap() {
 	    map: map
 	});
 
-	if (lastPos != null) {
+	// on click : open related infoWindow
+	marker.addListener('click', function () {
+	    selectPost(index);
+	});
+
+	// draw line between actual position and last position if not null
+	if (lastPos !== null) {
 	    drawLine(pos, lastPos);
 	}
 
+	// save last position
 	lastPos = pos;
 
+	// save marker in an array
 	markers.push(marker);
     });
 
@@ -85,6 +94,7 @@ function initMap() {
 	});
     }
 
+
     /**
      * Select the post on the map
      * @param {type} id
@@ -101,14 +111,15 @@ function initMap() {
 	// move to the selected post
 	infowindow.close();
 	setInfoWindowsContent(GoogleMappedPosts[id]);
+	console.log(firstLoad);
 	window.setTimeout(function () {
 	    map.panTo(unformatLatLng(GoogleMappedPosts[id].location));
 	    window.setTimeout(function () {
-            infowindow.open(map, markers[id]);
-	    }, 100);
-	}, 500);
+		infowindow.open(map, markers[id]);
+	    }, (firstLoad ? 8000 : 300));
+	}, (firstLoad ? 800 : 100));
 
-
+	firstLoad = false;
 
 
 	// ensure , the user is shown that he can click anymore on some control
@@ -136,10 +147,18 @@ function initMap() {
     }
 
     function setInfoWindowsContent(el) {
-        infoWindowContent.innerHTML = '<h3>' + el.title + "</h3>";
-        if(el.thumbnail != false){
+	var html = '';
+	if (el.thumbnail !== false) {
+	    html += '<img style="float:right; height:150px;"src="' + el.thumbnail + '" alt="thumbnail"/>';
+	}
+	html += '<div style="clear:none;">';
+	html += '<h3 style="margin:0px; clear:none;">' + el.title + "</h3>";
+	html += '<i>' + el.date + "</i>";
+	html += '<p>' + el.content + "</p>";
+	html += '<a href="' + el.link + '" target="_blank">voir l\'article </a>';
+	html += '</div>';
 
-        }
+	infoWindowContent.innerHTML = html;
     }
 
     function enableControl(control, enabled) {
@@ -156,9 +175,13 @@ function initMap() {
 	}
     }
 
+
     /**
      * Add the navigatePostControl
      * @constructor
+     * @param {type} controlDiv
+     * @param {type} map
+     * @returns {undefined}
      */
     function NavigatePostControl(controlDiv, map) {
 
