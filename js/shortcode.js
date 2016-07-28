@@ -127,8 +127,13 @@ function initMap() {
 	    case 0:
 		enableControl(oldestControl, false);
 		enableControl(nextControl, false);
-		enableControl(newestControl, true);
-		enableControl(previousControl, true);
+		if (GoogleMappedPosts.length > 1) {
+		    enableControl(newestControl, true);
+		    enableControl(previousControl, true);
+		} else {
+		    enableControl(newestControl, false);
+		    enableControl(previousControl, false);
+		}
 		break;
 	    case (GoogleMappedPosts.length - 1):
 		enableControl(oldestControl, true);
@@ -155,7 +160,7 @@ function initMap() {
 	html += '<h3 style="margin:0px; clear:none;">' + el.title + "</h3>";
 	html += '<i>' + el.date + "</i>";
 	html += '<p>' + el.content + "</p>";
-	html += '<a href="' + el.link + '" target="_blank">voir l\'article </a>';
+	html += '<a style="position:absolute;bottom:0px;" href="' + el.link + '" target="_blank">voir l\'article </a>';
 	html += '</div>';
 
 	infoWindowContent.innerHTML = html;
