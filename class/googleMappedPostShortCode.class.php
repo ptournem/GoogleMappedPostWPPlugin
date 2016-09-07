@@ -59,6 +59,7 @@ class googleMappedPostShortCode {
 
 	// get the post list
 	$post_list = get_posts(array(
+	    'numberposts' => -1,
 	    'orderby' => 'date',
 	    'sort_order' => 'DESC'
 		)
