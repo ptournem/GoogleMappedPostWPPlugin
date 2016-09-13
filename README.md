@@ -21,6 +21,10 @@ This is a WordPress plugin which allows you to localize your posts.
 After activating the plugin, go to the settings page and fill your Google Map Api Key. 
 Then you can use the plugin by adding location to your previous posts and adding the map on a page 
 
+## New functionalities 
+
+If you need other functionalities, feel free to ask. I'll try to add them as quick as possible
+
 ## Licence
 
 * License: GPLv2 or later
