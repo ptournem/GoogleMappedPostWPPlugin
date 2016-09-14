@@ -43,8 +43,12 @@ class googleMappedPostShortCode {
      */
     function display($atts, $content = null) {
 
+	// default value
 	$a = shortcode_atts(array(
-	    'height' => 500
+	    'height' => 500,
+	    'nb_post' => -1, //all post 
+	    'desc' => 'true', // sort order desc
+	    'category' => '', // posts from all category
 		), $atts);
 	// tell the script are to be printed
 	self::$add_script = true;
@@ -59,11 +63,11 @@ class googleMappedPostShortCode {
 
 	// get the post list
 	$post_list = get_posts(array(
-	    'numberposts' => -1,
+	    'numberposts' => $a['nb'], // filter on number of posts
 	    'orderby' => 'date',
-	    'sort_order' => 'DESC'
-		)
-	);
+	    'order' => ($a['desc'] == 'true') ? 'DESC' : 'ASC', // filter on sort order
+	    'category_name' =>$a['category'], // filter on category name
+	));
 
 	// get data for each post
 	foreach ($post_list as $post) {

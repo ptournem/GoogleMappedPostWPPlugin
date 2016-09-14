@@ -10,16 +10,24 @@ This is a WordPress plugin which allows you to localize your posts.
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-## Features
-
-* Set google map api key
-* Set posts location on a Google Map
-* Add a map with posts on a page with the shortcode : *googleMappedPosts*
-
 ## Installation 
 
 After activating the plugin, go to the settings page and fill your Google Map Api Key. 
-Then you can use the plugin by adding location to your previous posts and adding the map on a page 
+
+## Usage 
+
+Add a location on the map for the post you want to be shown by clicking on the google map on the post edit page
+
+Add the shortcode [googleMappedPosts] on the page in which you want to display your located posts.
+
+Here is a list of parameters for the shortcode:
+
+* height : give the size in pixel (default 500)
+* nb_post : number of posts shown (default -1 to show all posts)
+* category : the category name from which you want posts to be displayed (default empty for all category)
+* desc : show post in a desc order ( older to newer ), set it to *false* to change the order (default *true*)
+
+All parameters are optional
 
 ## New functionalities 
 
