@@ -1,11 +1,11 @@
 <?php
 
 /*
-  Plugin Name: GoogleMappedPostWPPlugin
+  Plugin Name: GMappedLocatedPost
   Description: Allow to localize your posts and show a linked map with them
-  Version: 0.1
+  Version: 1.0
   Author: Paul Tournemaine
-  Author URI: http://www.paultournemaine.fr
+  Author URI: https://github.com/ptournem
   License: GPL2
   License URI:        https://www.gnu.org/licenses/gpl-2.0.html
  */

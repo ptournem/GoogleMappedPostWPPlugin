@@ -1,11 +1,11 @@
-# Google Mapped Post WP Plugin
+# GMappedLocatedPost WP Plugin
 
 This is a WordPress plugin which allows you to localize your posts. 
 
 * Contributors: [Paul Tournemaine](https://github.com/ptournem)
 * Tags: google map, wordpress
 * Requires at least: 4.5
-* Tested up to: 4.5
+* Tested up to: 4.6.1
 * Stable tag: master
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
