@@ -3,7 +3,7 @@
 /*
   Plugin Name: GMappedLocatedPost
   Description: Allow to localize your posts and show a linked map with them
-  Version: 1.0
+  Version: 1.1.0
   Author: Paul Tournemaine
   Author URI: https://github.com/ptournem
   License: GPL2
