@@ -5,7 +5,7 @@ Donate link: paypal.me/ptournem/25
 Tags: google map, location
 Requires at least: 4.5
 Tested up to: 4.6.1
-Stable tag: 1.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,6 +23,7 @@ Here is a list of parameters for the shortcode:
  - nb_post : number of posts shown (default -1 to show all posts)
  - category : the category name from which you want posts to be displayed (default empty for all category)
  - desc : show post in a desc order ( older to newer ), set it to *false* to change the order (default *true*)
+ - zoom : the google map initial zoom when the page containing the shortcode is loaded (default 10)
 
 All parameters are optional
 
@@ -37,3 +38,7 @@ see : https://developers.google.com/maps/documentation/javascript/get-api-key
 1. This is the basic usage of the plugin to display a map of located posts
 2. This is the result (you only see one post here, but there are some more 
 that you can access by clicking on buttons)
+
+== Changelog ==
+
+1.1 : you are now able to change the initial google map zoom

@@ -6,9 +6,10 @@ function initMap() {
     var center = {lat: -34.397, lng: 150.644};
 
     // create map
-    var map = new google.maps.Map(document.getElementById('google-mapped-shortcode'), {
+    var el = document.getElementById('google-mapped-shortcode');
+    var map = new google.maps.Map(el, {
 	center: center,
-	zoom: 10
+	zoom: parseInt(el.getAttribute('attr-zoom'))
     });
 
     var infoWindowContent = document.createElement('div');

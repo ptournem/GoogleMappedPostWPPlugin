@@ -49,12 +49,13 @@ class googleMappedPostShortCode {
 	    'nb_post' => -1, //all post 
 	    'desc' => 'true', // sort order desc
 	    'category' => '', // posts from all category
+	    'zoom' => 10, // google map zoom
 		), $atts);
 	// tell the script are to be printed
 	self::$add_script = true;
 
 	// add the DOM element
-	$return_string = '<div id="google-mapped-shortcode" style="' . ($this->isApiKeyOK() ? "height: $a[height]px;" : '') . '" ' .
+	$return_string = '<div id="google-mapped-shortcode" attr-zoom="'.$a['zoom'].'" style="' . ($this->isApiKeyOK() ? "height: $a[height]px;" : '') . '" ' .
 		($this->isApiKeyOK() ? '<p><strong>Bad Google Map Api Key provided, see GoogleMappedPosts settings !</strong></p>' : '<p>No posts found !</p>')
 		. '</div>';
 
