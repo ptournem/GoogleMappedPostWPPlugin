@@ -64,7 +64,7 @@ class googleMappedPostShortCode {
 
 	// get the post list
 	$post_list = get_posts(array(
-	    'numberposts' => $a['nb'], // filter on number of posts
+	    'numberposts' => $a['nb_post'], // filter on number of posts
 	    'orderby' => 'date',
 	    'order' => ($a['desc'] == 'true') ? 'DESC' : 'ASC', // filter on sort order
 	    'category_name' =>$a['category'], // filter on category name
